@@ -1,0 +1,78 @@
+package analizadores;
+import java_cup.runtime.Symbol;
+
+%%
+
+%{
+public String errores="";
+%}
+
+%class Lexico
+%public 
+%line 
+%column
+%char 
+%cup 
+%unicode
+%ignorecase
+
+%init{ 
+    yyline = 0; 
+    yychar = 0; 
+%init}
+
+CONJ = "CONJ"
+DOS_PUNTOS=":"
+GUION = "-"
+MAYOR = ">"
+COMA = ","
+SEPARADOR="~"
+LLAVE_A="{"
+LLAVE_C="}"
+CONCAT="."
+DISYUNCION="|"
+KLEENE="*"
+POSTIVA="+"
+CBOOL="?"
+PORCENTAJE="%"
+PCOMA=";"
+ESPACIO= [ \t\r\n]+
+CARAC_ENTRADA=.|[^.]
+COMMENT_MULTILINE="<!" {CARAC_ENTRADA} + "!>"
+COMMENT_SIMPLE="//".*
+MINUSC= [a-z]
+MAYUSC= [A-Z]
+NUM = [0-9]
+ESP = [ -/:@\[-`{-}]
+ID = [a-zA-Z_][a-zA-Z0-9_]+
+CHAR = \" ("\\\""|[^\n\"]) \"
+STRING = \" ("\\\""|[^\n\"])+ \"
+
+%%
+<YYINITIAL> {ESPACIO} {}
+<YYINITIAL> {COMMENT_MULTILINE} {System.out.println(yytext());}
+<YYINITIAL> {COMMENT_SIMPLE} {System.out.println(yytext());}
+
+
+<YYINITIAL> {CONJ} {System.out.println("CONJ: "+yytext()); return new Symbol(sym.CONJ, yyline, yycolumn, yytext());}
+<YYINITIAL> {DOS_PUNTOS} {System.out.println("DOS_PUNTOS: "+yytext()); return new Symbol(sym.DOS_PUNTOS, yyline, yycolumn, yytext());}
+<YYINITIAL> {GUION} {System.out.println("GUION: "+yytext()); return new Symbol(sym.GUION, yyline, yycolumn, yytext());}
+<YYINITIAL> {MAYOR} {System.out.println("MAYOR: "+yytext());return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());}
+<YYINITIAL> {COMA} {System.out.println("COMA: "+yytext()); return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
+<YYINITIAL> {SEPARADOR} {System.out.println("SEPARADOR: "+yytext()); return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext());}
+<YYINITIAL> {LLAVE_A} {System.out.println("LLAVE_A: "+yytext()); return new Symbol(sym.LLAVE_A, yyline, yycolumn, yytext());}
+<YYINITIAL> {LLAVE_C} {System.out.println("LLAVE_C: "+yytext()); return new Symbol(sym.LLAVE_C, yyline, yycolumn, yytext());}
+<YYINITIAL> {CONCAT} {System.out.println("CONCAT: "+yytext()); return new Symbol(sym.CONCAT, yyline, yycolumn, yytext());}
+<YYINITIAL> {DISYUNCION} {System.out.println("DISYUNCION: "+yytext()); return new Symbol(sym.DISYUNCION, yyline, yycolumn, yytext());}
+<YYINITIAL> {KLEENE} {System.out.println("KLEENE: "+yytext()); return new Symbol(sym.KLEENE, yyline, yycolumn, yytext());}
+<YYINITIAL> {POSTIVA} {System.out.println("POSTIVA: "+yytext()); return new Symbol(sym.POSITIVA, yyline, yycolumn, yytext());}
+<YYINITIAL> {CBOOL} {System.out.println("CBOOL: "+yytext()); return new Symbol(sym.CBOOL, yyline, yycolumn, yytext());}
+<YYINITIAL> {PORCENTAJE} {System.out.println("PORCENTAJE: "+yytext()); return new Symbol(sym.PORCENTAJE, yyline, yycolumn, yytext());}
+<YYINITIAL> {PCOMA} {System.out.println("PCOMA: "+yytext()); return new Symbol(sym.PCOMA, yyline, yycolumn, yytext());}
+<YYINITIAL> {CHAR} {System.out.println("CHAR: "+yytext()); return new Symbol(sym.CHAR, yyline, yycolumn, yytext());}
+<YYINITIAL> {STRING} {System.out.println("STRING: "+yytext()); return new Symbol(sym.STRING, yyline, yycolumn, yytext());}
+<YYINITIAL> {ID} {System.out.println("ID: "+yytext()); return new Symbol(sym.ID, yyline, yycolumn, yytext());}
+<YYINITIAL> {MINUSC} {System.out.println("MINUSC: "+yytext()); return new Symbol(sym.MINUSC, yyline, yycolumn, yytext());}
+<YYINITIAL> {MAYUSC} {System.out.println("MAYUSC: "+yytext()); return new Symbol(sym.MAYUSC, yyline, yycolumn, yytext());}
+<YYINITIAL> {NUM} {System.out.println("NUM: "+yytext()); return new Symbol(sym.NUM, yyline, yycolumn, yytext());}
+<YYINITIAL> {ESP} {System.out.println("ESP: "+yytext()); return new Symbol(sym.ESP, yyline, yycolumn, yytext());}

@@ -1,0 +1,88 @@
+package analizadores;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+
+parser code
+{:
+    public ArrayList<AFD> automatas = new ArrayList<AFD>();
+
+    public void syntax_error(Symbol s){
+        System.out.println("Error sintactico: "+s.value+", Linea "+(s.left+1)+" Columna "+(s.right+1));
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        System.out.println("Error sintactico NR: "+s.value+", Linea "+(s.left+1)+" Columna "+(s.right+1));
+        
+    }   
+:}
+
+terminal String CONJ, DOS_PUNTOS, GUION, MAYOR, COMA, SEPARADOR, LLAVE_A, LLAVE_C, CONCAT, DISYUNCION,
+KLEENE, POSITIVA, CBOOL, PORCENTAJE, PCOMA, ID, MINUSC,
+MAYUSC, NUM, ESP, CHAR, STRING;
+
+non terminal Codigo;
+non terminal conjuntos;
+non terminal conjunto;
+non terminal notacion_conjuntos;
+non terminal conj_sep_comas;
+non terminal conj_sep_coma;
+non terminal expresion_regular;
+non terminal pruebas; 
+non terminal prueba;
+
+start with Codigo;
+
+Codigo::= LLAVE_A conjuntos PORCENTAJE PORCENTAJE PORCENTAJE PORCENTAJE pruebas LLAVE_C;
+
+conjuntos::= conjuntos conjunto|
+            conjunto;
+
+conjunto::= CONJ DOS_PUNTOS ID GUION MAYOR notacion_conjuntos PCOMA|
+            ID GUION MAYOR expresion_regular:a PCOMA {: automatas.add(new AFD((Nodo_Binario)a)); :};
+
+notacion_conjuntos::= MINUSC SEPARADOR MINUSC|
+                    MAYUSC SEPARADOR MAYUSC|
+                    NUM SEPARADOR NUM|
+                    ESP SEPARADOR ESP|
+                    conj_sep_comas;
+
+conj_sep_comas::= conj_sep_comas COMA conj_sep_coma |
+                  conj_sep_coma;
+
+conj_sep_coma::= MINUSC|
+                 MAYUSC|
+                 NUM|
+                 ESP;
+
+expresion_regular ::= CONCAT:a expresion_regular:b expresion_regular:c {: 
+                            Nodo_Binario n_nodo = new Nodo_Binario(a);
+                            n_nodo.setIzq((Nodo_Binario)b);
+                            n_nodo.setDer((Nodo_Binario)c);
+                            RESULT =  n_nodo; :}|
+                    DISYUNCION:a expresion_regular:b expresion_regular:c {: 
+                            Nodo_Binario n_nodo = new Nodo_Binario(a);
+                            n_nodo.setIzq((Nodo_Binario)b);
+                            n_nodo.setDer((Nodo_Binario)c);
+                            RESULT =  n_nodo; :}|
+                    KLEENE:a expresion_regular:b {: 
+                            Nodo_Binario n_nodo = new Nodo_Binario(a);
+                            n_nodo.setIzq((Nodo_Binario)b);
+                            RESULT =  n_nodo; :}|
+                    POSITIVA:a expresion_regular:b {: 
+                            Nodo_Binario n_nodo = new Nodo_Binario(a);
+                            n_nodo.setIzq((Nodo_Binario)b);
+                            RESULT =  n_nodo; :}|
+                    CBOOL:a expresion_regular:b {: 
+                            Nodo_Binario n_nodo = new Nodo_Binario(a);
+                            n_nodo.setIzq((Nodo_Binario)b);
+                            RESULT =  n_nodo; :}|
+                    LLAVE_A ID:a LLAVE_C {: Nodo_Binario n_nodo = new Nodo_Binario(a);
+                              RESULT =  n_nodo; :}|
+                    CHAR:a {: Nodo_Binario n_nodo = new Nodo_Binario(a);
+                              RESULT =  n_nodo; :};
+
+pruebas ::= pruebas prueba|
+            prueba;
+
+prueba ::= ID DOS_PUNTOS STRING PCOMA|
+           ID DOS_PUNTOS CHAR PCOMA;
