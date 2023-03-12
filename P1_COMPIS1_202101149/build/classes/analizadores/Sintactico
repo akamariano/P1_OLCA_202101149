@@ -5,13 +5,17 @@ import java.util.ArrayList;
 parser code
 {:
     public ArrayList<AFD> automatas = new ArrayList<AFD>();
-
+    public ArrayList<Conjunto> conjuntos = new ArrayList<Conjunto>();
+    public ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
+    public String errores_s = "";
     public void syntax_error(Symbol s){
         System.out.println("Error sintactico: "+s.value+", Linea "+(s.left+1)+" Columna "+(s.right+1));
+        errores_s += "<tr><td>Sintáctico</td><td> Error sintactico encontrado: \""+s.value+"\"</td><td>"+(s.left+1)+"</td><td>"+(s.right+1)+"</td></tr>\n";
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
         System.out.println("Error sintactico NR: "+s.value+", Linea "+(s.left+1)+" Columna "+(s.right+1));
+        errores_s += "<tr><td>Sintáctico</td><td> Error sintactico No recuperable encontrado: \""+s.value+"\"</td><td>"+(s.left+1)+"</td><td>"+(s.right+1)+"</td></tr>\n";
         
     }   
 :}
@@ -37,22 +41,54 @@ Codigo::= LLAVE_A conjuntos PORCENTAJE PORCENTAJE PORCENTAJE PORCENTAJE pruebas 
 conjuntos::= conjuntos conjunto|
             conjunto;
 
-conjunto::= CONJ DOS_PUNTOS ID GUION MAYOR notacion_conjuntos PCOMA|
-            ID GUION MAYOR expresion_regular:a PCOMA {: automatas.add(new AFD((Nodo_Binario)a)); :};
+conjunto::= CONJ DOS_PUNTOS ID:a GUION MAYOR notacion_conjuntos:b PCOMA {:   conjuntos.add(new Conjunto(a,(ArrayList) b));  :}|
+            ID:b GUION MAYOR expresion_regular:a PCOMA {: automatas.add(new AFD((Nodo_Binario)a, b)); :};
 
-notacion_conjuntos::= MINUSC SEPARADOR MINUSC|
-                    MAYUSC SEPARADOR MAYUSC|
-                    NUM SEPARADOR NUM|
-                    ESP SEPARADOR ESP|
-                    conj_sep_comas;
+notacion_conjuntos::= MINUSC:a SEPARADOR MINUSC:b {:
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            :}|
+                    MAYUSC:a SEPARADOR MAYUSC:b{:
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            :}|
+                    NUM:a SEPARADOR NUM:b{:
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            :}|
+                    ESP:a SEPARADOR ESP:b{:
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            :}|
+                    conj_sep_comas:a {:
+                String notacion = (String) a;
+                ArrayList<Integer> nuevo_conjunto = new ArrayList<>();
+                for(int i = 0;i < notacion.length();i++)
+                {
+                   nuevo_conjunto.add((int) notacion.charAt(i));
+                }
+                RESULT = nuevo_conjunto;
+                :};
 
-conj_sep_comas::= conj_sep_comas COMA conj_sep_coma |
-                  conj_sep_coma;
+conj_sep_comas::= conj_sep_comas:a COMA conj_sep_coma:b {:RESULT = (String)a+(String)b;:} |
+                  conj_sep_coma:a{:RESULT = a;:};
 
-conj_sep_coma::= MINUSC|
-                 MAYUSC|
-                 NUM|
-                 ESP;
+conj_sep_coma::= MINUSC:a{:RESULT= a;:}|
+                 MAYUSC:a{:RESULT= a;:}|
+                 NUM:a{:RESULT= a;:}|
+                 ESP:a{:RESULT= a;:};
 
 expresion_regular ::= CONCAT:a expresion_regular:b expresion_regular:c {: 
                             Nodo_Binario n_nodo = new Nodo_Binario(a);
@@ -77,12 +113,14 @@ expresion_regular ::= CONCAT:a expresion_regular:b expresion_regular:c {:
                             n_nodo.setIzq((Nodo_Binario)b);
                             RESULT =  n_nodo; :}|
                     LLAVE_A ID:a LLAVE_C {: Nodo_Binario n_nodo = new Nodo_Binario(a);
+                              n_nodo.setHoja(true);
                               RESULT =  n_nodo; :}|
                     CHAR:a {: Nodo_Binario n_nodo = new Nodo_Binario(a);
+                              n_nodo.setHoja(true);
                               RESULT =  n_nodo; :};
 
 pruebas ::= pruebas prueba|
             prueba;
 
-prueba ::= ID DOS_PUNTOS STRING PCOMA|
-           ID DOS_PUNTOS CHAR PCOMA;
+prueba ::= ID:a DOS_PUNTOS STRING:b PCOMA {: pruebas.add(new Prueba(a,b));:}|
+           ID:a DOS_PUNTOS CHAR:b PCOMA {: pruebas.add(new Prueba(a,b));:};

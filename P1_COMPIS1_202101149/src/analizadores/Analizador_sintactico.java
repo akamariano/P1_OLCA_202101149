@@ -172,13 +172,17 @@ public class Analizador_sintactico extends java_cup.runtime.lr_parser {
 
 
     public ArrayList<AFD> automatas = new ArrayList<AFD>();
-
+    public ArrayList<Conjunto> conjuntos = new ArrayList<Conjunto>();
+    public ArrayList<Prueba> pruebas = new ArrayList<Prueba>();
+    public String errores_s = "";
     public void syntax_error(Symbol s){
         System.out.println("Error sintactico: "+s.value+", Linea "+(s.left+1)+" Columna "+(s.right+1));
+        errores_s += "<tr><td>Sintáctico</td><td> Error sintactico encontrado: \""+s.value+"\"</td><td>"+(s.left+1)+"</td><td>"+(s.right+1)+"</td></tr>\n";
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
         System.out.println("Error sintactico NR: "+s.value+", Linea "+(s.left+1)+" Columna "+(s.right+1));
+        errores_s += "<tr><td>Sintáctico</td><td> Error sintactico No recuperable encontrado: \""+s.value+"\"</td><td>"+(s.left+1)+"</td><td>"+(s.right+1)+"</td></tr>\n";
         
     }   
 
@@ -252,7 +256,13 @@ class CUP$Analizador_sintactico$actions {
           case 4: // conjunto ::= CONJ DOS_PUNTOS ID GUION MAYOR notacion_conjuntos PCOMA 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).value;
+		   conjuntos.add(new Conjunto(a,(ArrayList) b));  
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conjunto",2, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -261,10 +271,13 @@ class CUP$Analizador_sintactico$actions {
           case 5: // conjunto ::= ID GUION MAYOR expresion_regular PCOMA 
             {
               Object RESULT =null;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)).value;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).value;
-		 automatas.add(new AFD((Nodo_Binario)a)); 
+		 automatas.add(new AFD((Nodo_Binario)a, b)); 
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conjunto",2, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -273,7 +286,19 @@ class CUP$Analizador_sintactico$actions {
           case 6: // notacion_conjuntos ::= MINUSC SEPARADOR MINUSC 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("notacion_conjuntos",3, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -282,7 +307,19 @@ class CUP$Analizador_sintactico$actions {
           case 7: // notacion_conjuntos ::= MAYUSC SEPARADOR MAYUSC 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("notacion_conjuntos",3, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -291,7 +328,19 @@ class CUP$Analizador_sintactico$actions {
           case 8: // notacion_conjuntos ::= NUM SEPARADOR NUM 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("notacion_conjuntos",3, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -300,7 +349,19 @@ class CUP$Analizador_sintactico$actions {
           case 9: // notacion_conjuntos ::= ESP SEPARADOR ESP 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		
+            ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
+            for(int i = (int) a.charAt(0);i<=(int) b.charAt(0);i++){
+                nuevo_conjunto.add(i);
+            }
+            RESULT = nuevo_conjunto;
+            
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("notacion_conjuntos",3, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -309,7 +370,18 @@ class CUP$Analizador_sintactico$actions {
           case 10: // notacion_conjuntos ::= conj_sep_comas 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		
+                String notacion = (String) a;
+                ArrayList<Integer> nuevo_conjunto = new ArrayList<>();
+                for(int i = 0;i < notacion.length();i++)
+                {
+                   nuevo_conjunto.add((int) notacion.charAt(i));
+                }
+                RESULT = nuevo_conjunto;
+                
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("notacion_conjuntos",3, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -318,7 +390,13 @@ class CUP$Analizador_sintactico$actions {
           case 11: // conj_sep_comas ::= conj_sep_comas COMA conj_sep_coma 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		RESULT = (String)a+(String)b;
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conj_sep_comas",4, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -327,7 +405,10 @@ class CUP$Analizador_sintactico$actions {
           case 12: // conj_sep_comas ::= conj_sep_coma 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		RESULT = a;
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conj_sep_comas",4, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -336,7 +417,10 @@ class CUP$Analizador_sintactico$actions {
           case 13: // conj_sep_coma ::= MINUSC 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		RESULT= a;
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conj_sep_coma",5, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -345,7 +429,10 @@ class CUP$Analizador_sintactico$actions {
           case 14: // conj_sep_coma ::= MAYUSC 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		RESULT= a;
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conj_sep_coma",5, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -354,7 +441,10 @@ class CUP$Analizador_sintactico$actions {
           case 15: // conj_sep_coma ::= NUM 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		RESULT= a;
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conj_sep_coma",5, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -363,7 +453,10 @@ class CUP$Analizador_sintactico$actions {
           case 16: // conj_sep_coma ::= ESP 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
+		RESULT= a;
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("conj_sep_coma",5, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -474,6 +567,7 @@ class CUP$Analizador_sintactico$actions {
 		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).value;
 		 Nodo_Binario n_nodo = new Nodo_Binario(a);
+                              n_nodo.setHoja(true);
                               RESULT =  n_nodo; 
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("expresion_regular",6, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
@@ -487,6 +581,7 @@ class CUP$Analizador_sintactico$actions {
 		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.peek()).value;
 		 Nodo_Binario n_nodo = new Nodo_Binario(a);
+                              n_nodo.setHoja(true);
                               RESULT =  n_nodo; 
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("expresion_regular",6, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
@@ -514,7 +609,13 @@ class CUP$Analizador_sintactico$actions {
           case 26: // prueba ::= ID DOS_PUNTOS STRING PCOMA 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).value;
+		 pruebas.add(new Prueba(a,b));
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("prueba",8, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;
@@ -523,7 +624,13 @@ class CUP$Analizador_sintactico$actions {
           case 27: // prueba ::= ID DOS_PUNTOS CHAR PCOMA 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).right;
+		String b = (String)((java_cup.runtime.Symbol) CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-1)).value;
+		 pruebas.add(new Prueba(a,b));
               CUP$Analizador_sintactico$result = parser.getSymbolFactory().newSymbol("prueba",8, ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.elementAt(CUP$Analizador_sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Analizador_sintactico$stack.peek()), RESULT);
             }
           return CUP$Analizador_sintactico$result;

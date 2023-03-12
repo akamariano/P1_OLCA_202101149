@@ -37,16 +37,17 @@ CBOOL="?"
 PORCENTAJE="%"
 PCOMA=";"
 ESPACIO= [ \t\r\n]+
-CARAC_ENTRADA=.|[^.]
-COMMENT_MULTILINE="<!" {CARAC_ENTRADA} + "!>"
+COMMENT_MULTILINE="<!" ([^!] | ("!" [^\>]))+ "!>"
 COMMENT_SIMPLE="//".*
 MINUSC= [a-z]
 MAYUSC= [A-Z]
 NUM = [0-9]
 ESP = [ -/:@\[-`{-}]
+ESCAPADOS = "\\\""|"\\\'"|"\\n"
+NO_ESCAPADOS = [^\'\"]
 ID = [a-zA-Z_][a-zA-Z0-9_]+
-CHAR = \" ("\\\""|[^\n\"]) \"
-STRING = \" ("\\\""|[^\n\"])+ \"
+CHAR = (\" {NO_ESCAPADOS} \")|{ESCAPADOS}
+STRING = \" ([^\"]|"\\\"")+ \"
 
 %%
 <YYINITIAL> {ESPACIO} {}
@@ -57,7 +58,7 @@ STRING = \" ("\\\""|[^\n\"])+ \"
 <YYINITIAL> {CONJ} {System.out.println("CONJ: "+yytext()); return new Symbol(sym.CONJ, yyline, yycolumn, yytext());}
 <YYINITIAL> {DOS_PUNTOS} {System.out.println("DOS_PUNTOS: "+yytext()); return new Symbol(sym.DOS_PUNTOS, yyline, yycolumn, yytext());}
 <YYINITIAL> {GUION} {System.out.println("GUION: "+yytext()); return new Symbol(sym.GUION, yyline, yycolumn, yytext());}
-<YYINITIAL> {MAYOR} {System.out.println("MAYOR: "+yytext());return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());}
+<YYINITIAL> {MAYOR} {System.out.println("MAYOR: "+yytext()); return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());}
 <YYINITIAL> {COMA} {System.out.println("COMA: "+yytext()); return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
 <YYINITIAL> {SEPARADOR} {System.out.println("SEPARADOR: "+yytext()); return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext());}
 <YYINITIAL> {LLAVE_A} {System.out.println("LLAVE_A: "+yytext()); return new Symbol(sym.LLAVE_A, yyline, yycolumn, yytext());}
@@ -65,7 +66,7 @@ STRING = \" ("\\\""|[^\n\"])+ \"
 <YYINITIAL> {CONCAT} {System.out.println("CONCAT: "+yytext()); return new Symbol(sym.CONCAT, yyline, yycolumn, yytext());}
 <YYINITIAL> {DISYUNCION} {System.out.println("DISYUNCION: "+yytext()); return new Symbol(sym.DISYUNCION, yyline, yycolumn, yytext());}
 <YYINITIAL> {KLEENE} {System.out.println("KLEENE: "+yytext()); return new Symbol(sym.KLEENE, yyline, yycolumn, yytext());}
-<YYINITIAL> {POSTIVA} {System.out.println("POSTIVA: "+yytext()); return new Symbol(sym.POSITIVA, yyline, yycolumn, yytext());}
+<YYINITIAL> {POSTIVA} {System.out.println("POSITIVA: "+yytext()); return new Symbol(sym.POSITIVA, yyline, yycolumn, yytext());}
 <YYINITIAL> {CBOOL} {System.out.println("CBOOL: "+yytext()); return new Symbol(sym.CBOOL, yyline, yycolumn, yytext());}
 <YYINITIAL> {PORCENTAJE} {System.out.println("PORCENTAJE: "+yytext()); return new Symbol(sym.PORCENTAJE, yyline, yycolumn, yytext());}
 <YYINITIAL> {PCOMA} {System.out.println("PCOMA: "+yytext()); return new Symbol(sym.PCOMA, yyline, yycolumn, yytext());}
@@ -76,3 +77,5 @@ STRING = \" ("\\\""|[^\n\"])+ \"
 <YYINITIAL> {MAYUSC} {System.out.println("MAYUSC: "+yytext()); return new Symbol(sym.MAYUSC, yyline, yycolumn, yytext());}
 <YYINITIAL> {NUM} {System.out.println("NUM: "+yytext()); return new Symbol(sym.NUM, yyline, yycolumn, yytext());}
 <YYINITIAL> {ESP} {System.out.println("ESP: "+yytext()); return new Symbol(sym.ESP, yyline, yycolumn, yytext());}
+<YYINITIAL> . {errores += "<tr><td>Léxico</td><td> El caracter \""+yytext()+"\" no pertenece al lenguaje</td><td>"+yyline+"</td><td>"+yycolumn+"</td></tr>\n";}
+

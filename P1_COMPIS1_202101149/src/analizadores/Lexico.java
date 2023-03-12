@@ -34,12 +34,12 @@ public class Lexico implements java_cup.runtime.Scanner {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
-    "\11\0\1\23\1\24\1\26\1\26\1\25\22\0\1\23\1\30\1\43"+
-    "\2\41\1\21\4\41\1\16\1\17\1\10\1\6\1\14\1\31\12\40"+
-    "\1\5\1\22\1\27\1\0\1\7\1\20\1\41\2\37\1\1\6\37"+
-    "\1\4\3\37\1\3\1\2\13\37\1\41\1\44\2\41\1\42\1\41"+
-    "\2\32\1\33\6\32\1\36\3\32\1\35\1\34\13\32\1\12\1\15"+
-    "\1\13\1\11\6\0\1\26\u1fa2\0\1\26\1\26\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+    "\11\0\1\23\1\27\1\30\1\30\1\27\22\0\1\23\1\25\1\42"+
+    "\2\40\1\21\1\40\1\43\2\40\1\16\1\17\1\10\1\6\1\14"+
+    "\1\26\12\37\1\5\1\22\1\24\1\0\1\7\1\20\1\40\2\36"+
+    "\1\1\6\36\1\4\3\36\1\3\1\2\13\36\1\40\1\41\2\40"+
+    "\1\44\1\40\2\31\1\32\6\31\1\35\3\31\1\34\1\33\13\31"+
+    "\1\12\1\15\1\13\1\11\6\0\1\30\u1fa2\0\1\30\1\30\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
 
   /** 
    * Translates characters to character classes
@@ -52,14 +52,14 @@ public class Lexico implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\2\1\1\2\1\3\1\4\1\5\1\6\1\7"+
+    "\1\0\1\1\2\2\1\3\1\4\1\5\1\6\1\7"+
     "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
-    "\1\20\1\0\2\21\2\22\1\23\2\21\2\24\1\0"+
-    "\1\25\2\0\1\24\2\0\1\26\1\0\1\26\1\27"+
-    "\1\0\2\30\1\25";
+    "\1\20\1\21\1\1\2\22\2\23\1\24\3\22\2\25"+
+    "\1\0\1\26\1\27\3\0\1\25\3\0\1\27\1\30"+
+    "\1\31\1\0\1\30\1\26";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[43];
+    int [] result = new int[46];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -84,15 +84,15 @@ public class Lexico implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\45\0\112\0\157\0\157\0\157\0\157\0\157"+
-    "\0\157\0\157\0\157\0\157\0\157\0\157\0\157\0\157"+
-    "\0\157\0\224\0\271\0\157\0\336\0\112\0\45\0\157"+
-    "\0\112\0\u0103\0\112\0\u0128\0\u014d\0\u0172\0\u0197\0\u01bc"+
-    "\0\u01e1\0\u0206\0\u022b\0\157\0\u0250\0\u0197\0\112\0\u0275"+
-    "\0\157\0\u022b\0\u0206";
+    "\0\0\0\45\0\112\0\157\0\45\0\45\0\45\0\45"+
+    "\0\45\0\45\0\45\0\45\0\45\0\45\0\45\0\45"+
+    "\0\45\0\45\0\224\0\271\0\45\0\336\0\157\0\112"+
+    "\0\45\0\u0103\0\u0128\0\157\0\157\0\u014d\0\u0172\0\u0197"+
+    "\0\45\0\u01bc\0\u01e1\0\u0206\0\u022b\0\u0250\0\u0275\0\u029a"+
+    "\0\u0206\0\45\0\157\0\u02bf\0\u0206\0\45";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[43];
+    int [] result = new int[46];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -115,23 +115,24 @@ public class Lexico implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\0\1\2\3\3\1\4\1\5\1\6\1\7\1\10"+
-    "\1\11\1\12\1\13\1\14\1\15\1\16\1\17\1\20"+
-    "\1\21\3\22\1\0\1\23\1\24\1\25\1\26\1\27"+
-    "\3\26\1\3\1\30\1\24\1\31\1\32\1\24\1\0"+
-    "\1\33\1\34\2\33\25\0\2\33\1\34\4\33\1\0"+
-    "\1\33\3\0\4\33\25\0\7\33\1\0\1\33\72\0"+
-    "\3\22\47\0\1\35\45\0\1\36\13\0\24\37\1\0"+
-    "\16\37\1\0\1\40\1\0\2\33\1\41\1\33\25\0"+
-    "\3\33\1\41\3\33\1\0\1\33\2\0\45\42\24\36"+
-    "\3\0\16\36\24\43\1\0\16\43\1\44\1\45\24\43"+
-    "\1\0\16\43\1\46\1\45\1\0\3\33\1\47\25\0"+
-    "\4\33\1\47\2\33\1\0\1\33\2\0\30\42\1\50"+
-    "\14\42\24\43\1\0\16\43\1\51\1\45\24\43\1\0"+
-    "\16\43\1\52\1\45\7\42\1\53\20\42\1\50\14\42";
+    "\1\2\1\3\3\4\1\5\1\6\1\7\1\10\1\11"+
+    "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
+    "\1\22\1\23\1\24\1\25\1\26\1\23\1\0\1\27"+
+    "\1\30\3\27\1\4\1\31\1\25\1\32\1\33\1\25"+
+    "\1\34\46\0\1\35\1\36\2\35\24\0\2\35\1\36"+
+    "\4\35\4\0\1\35\1\0\4\35\24\0\7\35\4\0"+
+    "\1\35\23\0\1\23\3\0\1\23\42\0\1\37\45\0"+
+    "\1\40\21\0\1\41\30\0\1\41\5\0\2\41\1\0"+
+    "\41\42\1\43\1\0\1\44\1\42\1\0\2\35\1\45"+
+    "\1\35\24\0\3\35\1\45\3\35\4\0\1\35\25\46"+
+    "\1\47\17\46\27\40\2\0\14\40\41\44\1\50\1\41"+
+    "\43\44\1\50\1\51\43\44\1\50\1\52\2\44\1\0"+
+    "\3\35\1\53\24\0\4\35\1\53\2\35\4\0\1\35"+
+    "\25\46\1\54\26\46\1\0\35\46\41\44\1\50\1\55"+
+    "\2\44\7\46\1\56\35\46";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[666];
+    int [] result = new int[740];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -169,12 +170,12 @@ public class Lexico implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\2\1\16\11\1\1\1\0\1\11\3\1\1\11"+
-    "\4\1\1\0\1\1\2\0\1\1\2\0\1\11\1\0"+
-    "\2\1\1\0\1\11\2\1";
+    "\1\0\1\11\2\1\16\11\2\1\1\11\3\1\1\11"+
+    "\5\1\1\0\1\1\1\11\3\0\1\1\3\0\1\1"+
+    "\1\11\1\1\1\0\1\1\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[43];
+    int [] result = new int[46];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -275,7 +276,7 @@ public String errores="";
     char [] map = new char[0x110000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
-    while (i < 148) {
+    while (i < 152) {
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -641,125 +642,130 @@ public String errores="";
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.println("MAYUSC: "+yytext()); return new Symbol(sym.MAYUSC, yyline, yycolumn, yytext());
-            } 
-            // fall through
-          case 25: break;
-          case 2: 
-            { System.out.println("DOS_PUNTOS: "+yytext()); return new Symbol(sym.DOS_PUNTOS, yyline, yycolumn, yytext());
+            { errores += "<tr><td>Léxico</td><td> El caracter \""+yytext()+"\" no pertenece al lenguaje</td><td>"+yyline+"</td><td>"+yycolumn+"</td></tr>\n";
             } 
             // fall through
           case 26: break;
-          case 3: 
-            { System.out.println("GUION: "+yytext()); return new Symbol(sym.GUION, yyline, yycolumn, yytext());
+          case 2: 
+            { System.out.println("MAYUSC: "+yytext()); return new Symbol(sym.MAYUSC, yyline, yycolumn, yytext());
             } 
             // fall through
           case 27: break;
-          case 4: 
-            { System.out.println("MAYOR: "+yytext());return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());
+          case 3: 
+            { System.out.println("DOS_PUNTOS: "+yytext()); return new Symbol(sym.DOS_PUNTOS, yyline, yycolumn, yytext());
             } 
             // fall through
           case 28: break;
-          case 5: 
-            { System.out.println("COMA: "+yytext()); return new Symbol(sym.COMA, yyline, yycolumn, yytext());
+          case 4: 
+            { System.out.println("GUION: "+yytext()); return new Symbol(sym.GUION, yyline, yycolumn, yytext());
             } 
             // fall through
           case 29: break;
-          case 6: 
-            { System.out.println("SEPARADOR: "+yytext()); return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext());
+          case 5: 
+            { System.out.println("MAYOR: "+yytext()); return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());
             } 
             // fall through
           case 30: break;
-          case 7: 
-            { System.out.println("LLAVE_A: "+yytext()); return new Symbol(sym.LLAVE_A, yyline, yycolumn, yytext());
+          case 6: 
+            { System.out.println("COMA: "+yytext()); return new Symbol(sym.COMA, yyline, yycolumn, yytext());
             } 
             // fall through
           case 31: break;
-          case 8: 
-            { System.out.println("LLAVE_C: "+yytext()); return new Symbol(sym.LLAVE_C, yyline, yycolumn, yytext());
+          case 7: 
+            { System.out.println("SEPARADOR: "+yytext()); return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext());
             } 
             // fall through
           case 32: break;
-          case 9: 
-            { System.out.println("CONCAT: "+yytext()); return new Symbol(sym.CONCAT, yyline, yycolumn, yytext());
+          case 8: 
+            { System.out.println("LLAVE_A: "+yytext()); return new Symbol(sym.LLAVE_A, yyline, yycolumn, yytext());
             } 
             // fall through
           case 33: break;
-          case 10: 
-            { System.out.println("DISYUNCION: "+yytext()); return new Symbol(sym.DISYUNCION, yyline, yycolumn, yytext());
+          case 9: 
+            { System.out.println("LLAVE_C: "+yytext()); return new Symbol(sym.LLAVE_C, yyline, yycolumn, yytext());
             } 
             // fall through
           case 34: break;
-          case 11: 
-            { System.out.println("KLEENE: "+yytext()); return new Symbol(sym.KLEENE, yyline, yycolumn, yytext());
+          case 10: 
+            { System.out.println("CONCAT: "+yytext()); return new Symbol(sym.CONCAT, yyline, yycolumn, yytext());
             } 
             // fall through
           case 35: break;
-          case 12: 
-            { System.out.println("POSTIVA: "+yytext()); return new Symbol(sym.POSITIVA, yyline, yycolumn, yytext());
+          case 11: 
+            { System.out.println("DISYUNCION: "+yytext()); return new Symbol(sym.DISYUNCION, yyline, yycolumn, yytext());
             } 
             // fall through
           case 36: break;
-          case 13: 
-            { System.out.println("CBOOL: "+yytext()); return new Symbol(sym.CBOOL, yyline, yycolumn, yytext());
+          case 12: 
+            { System.out.println("KLEENE: "+yytext()); return new Symbol(sym.KLEENE, yyline, yycolumn, yytext());
             } 
             // fall through
           case 37: break;
-          case 14: 
-            { System.out.println("PORCENTAJE: "+yytext()); return new Symbol(sym.PORCENTAJE, yyline, yycolumn, yytext());
+          case 13: 
+            { System.out.println("POSITIVA: "+yytext()); return new Symbol(sym.POSITIVA, yyline, yycolumn, yytext());
             } 
             // fall through
           case 38: break;
-          case 15: 
-            { System.out.println("PCOMA: "+yytext()); return new Symbol(sym.PCOMA, yyline, yycolumn, yytext());
+          case 14: 
+            { System.out.println("CBOOL: "+yytext()); return new Symbol(sym.CBOOL, yyline, yycolumn, yytext());
             } 
             // fall through
           case 39: break;
-          case 16: 
-            { 
+          case 15: 
+            { System.out.println("PORCENTAJE: "+yytext()); return new Symbol(sym.PORCENTAJE, yyline, yycolumn, yytext());
             } 
             // fall through
           case 40: break;
-          case 17: 
-            { System.out.println("ESP: "+yytext()); return new Symbol(sym.ESP, yyline, yycolumn, yytext());
+          case 16: 
+            { System.out.println("PCOMA: "+yytext()); return new Symbol(sym.PCOMA, yyline, yycolumn, yytext());
             } 
             // fall through
           case 41: break;
-          case 18: 
-            { System.out.println("MINUSC: "+yytext()); return new Symbol(sym.MINUSC, yyline, yycolumn, yytext());
+          case 17: 
+            { 
             } 
             // fall through
           case 42: break;
-          case 19: 
-            { System.out.println("NUM: "+yytext()); return new Symbol(sym.NUM, yyline, yycolumn, yytext());
+          case 18: 
+            { System.out.println("ESP: "+yytext()); return new Symbol(sym.ESP, yyline, yycolumn, yytext());
             } 
             // fall through
           case 43: break;
-          case 20: 
-            { System.out.println("ID: "+yytext()); return new Symbol(sym.ID, yyline, yycolumn, yytext());
+          case 19: 
+            { System.out.println("MINUSC: "+yytext()); return new Symbol(sym.MINUSC, yyline, yycolumn, yytext());
             } 
             // fall through
           case 44: break;
-          case 21: 
-            { System.out.println(yytext());
+          case 20: 
+            { System.out.println("NUM: "+yytext()); return new Symbol(sym.NUM, yyline, yycolumn, yytext());
             } 
             // fall through
           case 45: break;
-          case 22: 
-            { System.out.println("CHAR: "+yytext()); return new Symbol(sym.CHAR, yyline, yycolumn, yytext());
+          case 21: 
+            { System.out.println("ID: "+yytext()); return new Symbol(sym.ID, yyline, yycolumn, yytext());
             } 
             // fall through
           case 46: break;
-          case 23: 
-            { System.out.println("CONJ: "+yytext()); return new Symbol(sym.CONJ, yyline, yycolumn, yytext());
+          case 22: 
+            { System.out.println(yytext());
             } 
             // fall through
           case 47: break;
+          case 23: 
+            { System.out.println("CHAR: "+yytext()); return new Symbol(sym.CHAR, yyline, yycolumn, yytext());
+            } 
+            // fall through
+          case 48: break;
           case 24: 
             { System.out.println("STRING: "+yytext()); return new Symbol(sym.STRING, yyline, yycolumn, yytext());
             } 
             // fall through
-          case 48: break;
+          case 49: break;
+          case 25: 
+            { System.out.println("CONJ: "+yytext()); return new Symbol(sym.CONJ, yyline, yycolumn, yytext());
+            } 
+            // fall through
+          case 50: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
