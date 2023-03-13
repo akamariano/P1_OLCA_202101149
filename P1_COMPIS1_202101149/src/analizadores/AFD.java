@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package analizadores;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+
 /**
  *
  * @author Mariano Rack
@@ -392,7 +394,7 @@ public class AFD {
                 ArrayList<Integer> actual = f.get(indice);
                 for (ArrayList<ArrayList> estados : transiciones) {
                     if (estados.get(0).equals(actual)) {
-                        s += "  S" + transiciones.indexOf(f) + "->S" + transiciones.indexOf(estados) + "[label=\"" + siguientes.get(indice - 1).getSimbolo().replaceAll("\"", "") + "\"]";
+                        s += "  S" + transiciones.indexOf(f) + "->S" + transiciones.indexOf(estados) + "[label=\"" + terminales.get(indice - 1).replaceAll("\"", "") + "\"]";
                         break;
                     }
                 }
@@ -412,7 +414,8 @@ public class AFD {
             ArrayList<ArrayList> estado = transiciones.get(num_estado);
             caracter = (int) cadena.charAt(indice);
             encontrado = false;
-            for (String t : terminales) {
+            for(int siguiente: (ArrayList<Integer>)estado.get(0)){
+                String t = siguientes.get(siguiente).getSimbolo();
                 if (t.startsWith("\"") && t.endsWith("\"")) {
                     if ((int) t.charAt(1) == caracter) {
                         encontrado = true;
@@ -491,7 +494,7 @@ public class AFD {
         String[] c = {"dot", "-Tpng", file.getAbsolutePath(), "-O"};
         Process p = Runtime.getRuntime().exec(c);
         int err = p.waitFor();
-        file.delete();
+        //file.delete();
     }
 
     public String getNombre() {

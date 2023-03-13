@@ -8,37 +8,35 @@ package analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int GUION = 4;
-  public static final int CBOOL = 14;
-  public static final int CHAR = 22;
-  public static final int POSITIVA = 13;
-  public static final int CONCAT = 10;
-  public static final int ID = 17;
-  public static final int NUM = 20;
+  public static final int CBOOL = 13;
+  public static final int CHAR = 21;
+  public static final int POSITIVA = 12;
+  public static final int FLECHA = 4;
+  public static final int CONCAT = 9;
+  public static final int ID = 16;
+  public static final int NUM = 19;
   public static final int DOS_PUNTOS = 3;
-  public static final int PORCENTAJE = 15;
-  public static final int KLEENE = 12;
-  public static final int MAYUSC = 19;
-  public static final int STRING = 23;
-  public static final int SEPARADOR = 7;
-  public static final int COMA = 6;
-  public static final int MAYOR = 5;
+  public static final int PORCENTAJE = 14;
+  public static final int KLEENE = 11;
+  public static final int MAYUSC = 18;
+  public static final int STRING = 22;
+  public static final int SEPARADOR = 6;
+  public static final int COMA = 5;
   public static final int EOF = 0;
   public static final int CONJ = 2;
-  public static final int DISYUNCION = 11;
-  public static final int ESP = 21;
+  public static final int DISYUNCION = 10;
+  public static final int ESP = 20;
   public static final int error = 1;
-  public static final int LLAVE_C = 9;
-  public static final int MINUSC = 18;
-  public static final int LLAVE_A = 8;
-  public static final int PCOMA = 16;
+  public static final int LLAVE_C = 8;
+  public static final int MINUSC = 17;
+  public static final int LLAVE_A = 7;
+  public static final int PCOMA = 15;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "CONJ",
   "DOS_PUNTOS",
-  "GUION",
-  "MAYOR",
+  "FLECHA",
   "COMA",
   "SEPARADOR",
   "LLAVE_A",

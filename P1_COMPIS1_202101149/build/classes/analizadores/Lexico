@@ -23,8 +23,7 @@ public String errores="";
 
 CONJ = "CONJ"
 DOS_PUNTOS=":"
-GUION = "-"
-MAYOR = ">"
+FLECHA = "-" {ESPACIO}* ">"
 COMA = ","
 SEPARADOR="~"
 LLAVE_A="{"
@@ -57,8 +56,7 @@ STRING = \" ([^\"]|"\\\"")+ \"
 
 <YYINITIAL> {CONJ} {System.out.println("CONJ: "+yytext()); return new Symbol(sym.CONJ, yyline, yycolumn, yytext());}
 <YYINITIAL> {DOS_PUNTOS} {System.out.println("DOS_PUNTOS: "+yytext()); return new Symbol(sym.DOS_PUNTOS, yyline, yycolumn, yytext());}
-<YYINITIAL> {GUION} {System.out.println("GUION: "+yytext()); return new Symbol(sym.GUION, yyline, yycolumn, yytext());}
-<YYINITIAL> {MAYOR} {System.out.println("MAYOR: "+yytext()); return new Symbol(sym.MAYOR, yyline, yycolumn, yytext());}
+<YYINITIAL> {FLECHA} {System.out.println("FLECHA: "+yytext()); return new Symbol(sym.FLECHA, yyline, yycolumn, yytext());}
 <YYINITIAL> {COMA} {System.out.println("COMA: "+yytext()); return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
 <YYINITIAL> {SEPARADOR} {System.out.println("SEPARADOR: "+yytext()); return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext());}
 <YYINITIAL> {LLAVE_A} {System.out.println("LLAVE_A: "+yytext()); return new Symbol(sym.LLAVE_A, yyline, yycolumn, yytext());}
@@ -78,4 +76,3 @@ STRING = \" ([^\"]|"\\\"")+ \"
 <YYINITIAL> {NUM} {System.out.println("NUM: "+yytext()); return new Symbol(sym.NUM, yyline, yycolumn, yytext());}
 <YYINITIAL> {ESP} {System.out.println("ESP: "+yytext()); return new Symbol(sym.ESP, yyline, yycolumn, yytext());}
 <YYINITIAL> . {errores += "<tr><td>Léxico</td><td> El caracter \""+yytext()+"\" no pertenece al lenguaje</td><td>"+yyline+"</td><td>"+yycolumn+"</td></tr>\n";}
-

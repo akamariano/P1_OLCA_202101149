@@ -20,7 +20,7 @@ parser code
     }   
 :}
 
-terminal String CONJ, DOS_PUNTOS, GUION, MAYOR, COMA, SEPARADOR, LLAVE_A, LLAVE_C, CONCAT, DISYUNCION,
+terminal String CONJ, DOS_PUNTOS, FLECHA, COMA, SEPARADOR, LLAVE_A, LLAVE_C, CONCAT, DISYUNCION,
 KLEENE, POSITIVA, CBOOL, PORCENTAJE, PCOMA, ID, MINUSC,
 MAYUSC, NUM, ESP, CHAR, STRING;
 
@@ -41,8 +41,8 @@ Codigo::= LLAVE_A conjuntos PORCENTAJE PORCENTAJE PORCENTAJE PORCENTAJE pruebas 
 conjuntos::= conjuntos conjunto|
             conjunto;
 
-conjunto::= CONJ DOS_PUNTOS ID:a GUION MAYOR notacion_conjuntos:b PCOMA {:   conjuntos.add(new Conjunto(a,(ArrayList) b));  :}|
-            ID:b GUION MAYOR expresion_regular:a PCOMA {: automatas.add(new AFD((Nodo_Binario)a, b)); :};
+conjunto::= CONJ DOS_PUNTOS ID:a FLECHA notacion_conjuntos:b PCOMA {:   conjuntos.add(new Conjunto(a,(ArrayList) b));  :}|
+            ID:b FLECHA expresion_regular:a PCOMA {: automatas.add(new AFD((Nodo_Binario)a, b)); :};
 
 notacion_conjuntos::= MINUSC:a SEPARADOR MINUSC:b {:
             ArrayList<Integer> nuevo_conjunto = new ArrayList<Integer>();
