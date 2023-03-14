@@ -1,0 +1,26 @@
+graph{label = "Tabla transiciones"
+label=<
+ <TABLE border="1" cellspacing="2" cellpadding="10"  >
+  <TR>
+  <TD rowspan="2">Estado</TD>
+  <TD colspan="3">Terminales</TD>
+  </TR>
+  <TR>
+  <TD>abecedarioMinus</TD>
+  <TD>"_"</TD>
+  <TD>digito</TD>
+  </TR>
+  
+  <TR>
+  <TD>S0 [0]</TD>
+  <TD>S1</TD>
+  <TD>---</TD>
+  <TD>---</TD>
+  </TR>
+  <TR>
+  <TD>S1 [1, 2, 3, 4]</TD>
+  <TD>S1</TD>
+  <TD>S1</TD>
+  <TD>S1</TD>
+  </TR>
+ </TABLE>>}

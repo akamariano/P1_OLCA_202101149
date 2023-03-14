@@ -1,0 +1,9 @@
+digraph {label = "AFD decimales"
+rankdir="LR";
+node [shape="circle"];
+SI[shape = none, fontcolor="white"];S0;
+S1;
+S2;
+S3[shape="doublecircle"];
+SI->S0[label="Inicio"];
+  S0->S1[label="digito"]  S1->S1[label="digito"]  S1->S2[label="."]  S2->S3[label="digito"]  S3->S3[label="digito"]}

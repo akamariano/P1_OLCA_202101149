@@ -1,0 +1,7 @@
+digraph {label = "AFD identificador"
+rankdir="LR";
+node [shape="circle"];
+SI[shape = none, fontcolor="white"];S0;
+S1[shape="doublecircle"];
+SI->S0[label="Inicio"];
+  S0->S1[label="abecedarioMinus"]  S1->S1[label="abecedarioMinus"]  S1->S1[label="_"]  S1->S1[label="digito"]}

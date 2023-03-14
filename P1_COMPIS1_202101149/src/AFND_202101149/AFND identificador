@@ -1,0 +1,34 @@
+digraph {label = "AFND identificador";
+rankdir="LR";
+node [shape="circle"];
+N_0[fontcolor="white"];
+
+N_1[shape = doublecircle, fontcolor="white"];
+N_2[label = ""];
+N_0 -> N_2[label="abecedarioMinus"];
+N_3[label = ""];
+N_2 -> N_3[label="ε"];
+N_2 -> N_1[label="ε"];
+N_4[label = ""];
+N_4 -> N_1[label="ε"];
+N_4 -> N_3[label="ε"];
+N_5[label = ""];
+N_3 -> N_5[label="ε"];
+N_6[label = ""];
+N_6 -> N_4[label="ε"];
+N_5 -> N_6[label="_"];
+N_7[label = ""];
+N_3 -> N_7[label="ε"];
+N_8[label = ""];
+N_8 -> N_4[label="ε"];
+N_9[label = ""];
+N_7 -> N_9[label="ε"];
+N_10[label = ""];
+N_10 -> N_8[label="ε"];
+N_9 -> N_10[label="abecedarioMinus"];
+N_11[label = ""];
+N_7 -> N_11[label="ε"];
+N_12[label = ""];
+N_12 -> N_8[label="ε"];
+N_11 -> N_12[label="digito"];
+}

@@ -1,0 +1,22 @@
+digraph {label = "AFND decimales";
+rankdir="LR";
+node [shape="circle"];
+N_0[fontcolor="white"];
+
+N_1[shape = doublecircle, fontcolor="white"];
+N_2[label = ""];
+N_3[label = ""];
+N_0 -> N_3[label="ε"];
+N_4[label = ""];
+N_4 -> N_2[label="ε"];
+N_4 -> N_3[label="ε"];
+N_3 -> N_4[label="digito"];
+N_5[label = ""];
+N_2 -> N_5[label="."];
+N_6[label = ""];
+N_5 -> N_6[label="ε"];
+N_7[label = ""];
+N_7 -> N_1[label="ε"];
+N_7 -> N_6[label="ε"];
+N_6 -> N_7[label="digito"];
+}

@@ -1,0 +1,29 @@
+digraph {label = "Siguientes decimales"
+label=<
+ <TABLE border="1" cellspacing="2" cellpadding="10"  >
+  <TR>
+  <TD>Simbolo</TD>
+  <TD>Hoja</TD>
+  <TD>Siguientes</TD>
+  </TR>
+ <TR>
+  <TD>digito</TD>
+  <TD>0</TD>
+  <TD>[0, 1]</TD>
+  </TR>
+ <TR>
+  <TD>"."</TD>
+  <TD>1</TD>
+  <TD>[2]</TD>
+  </TR>
+ <TR>
+  <TD>digito</TD>
+  <TD>2</TD>
+  <TD>[2, 3]</TD>
+  </TR>
+ <TR>
+  <TD>#</TD>
+  <TD>3</TD>
+  <TD>[]</TD>
+  </TR>
+ </TABLE>>}
