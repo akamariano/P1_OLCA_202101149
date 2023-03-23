@@ -78,6 +78,34 @@ if (evaluado.contains(caracter)) {
 Para el testing de la app, se probaron diversos archivos de entrada con distintas complejidades y se probo la resistencia y recuperación de errores de la app
 # Gramática
 Respetando las reglas y empleando la Back Naus Form
+TOKENS
+CONJ = "CONJ"
+DOS_PUNTOS=":"
+FLECHA = "-" {ESPACIO}* ">"
+COMA = ","
+SEPARADOR="~"
+LLAVE_A="{"
+LLAVE_C="}"
+CONCAT="."
+DISYUNCION="|"
+KLEENE="*"
+POSTIVA="+"
+CBOOL="?"
+PORCENTAJE="%"
+PCOMA=";"
+ESPACIO= [ \t\r\n]+
+COMMENT_MULTILINE="<!" ([^!] | ("!" [^\>]))+ "!>"
+COMMENT_SIMPLE="//".*
+MINUSC= [a-z]
+MAYUSC= [A-Z]
+NUM = [0-9]
+ESP = [ -/:@\[-`{-}]
+ESCAPADOS = "\\\""|"\\\'"|"\\n"
+NO_ESCAPADOS = [^\'\"]
+ID = [a-zA-Z_][a-zA-Z0-9_]+
+CHAR = (\" {NO_ESCAPADOS} \")|{ESCAPADOS}
+STRING = \" ([^\"]|"\\\"")+ \"
+
 start with Codigo;
 
 Codigo::= LLAVE_A conjuntos PORCENTAJE PORCENTAJE PORCENTAJE PORCENTAJE pruebas LLAVE_C;
